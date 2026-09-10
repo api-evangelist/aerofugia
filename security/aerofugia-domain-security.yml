@@ -1,0 +1,23 @@
+generated: '2026-09-10'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts (probe-domain-security.py), enriched by hand
+  from the same 2026-09-10 probe session
+hosts:
+- host: www.aerofugia.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 18 09:01:42 2026 GMT
+  hsts: false
+  note: 'The root document (HTTP 200) carries no Strict-Transport-Security header; the only responses
+    that do are the nginx 301s served for /api* paths, which redirect to themselves. www is the entire
+    web surface: the apex aerofugia.com publishes no A record.'
+domains:
+- domain: aerofugia.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: false
+  mx: geely.com / Microsoft 365 (mx-inbound.geely.com, geely-com.mail.protection.outlook.com)
+  spf_record: v=spf1 include:spf.protection.outlook.com include:spf.geely.com -all
+  note: 'Mail and SPF are delegated to parent Geely; no _dmarc TXT record exists, and the apex publishes
+    no A record, no CAA and no DNSKEY.'

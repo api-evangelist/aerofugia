@@ -1,0 +1,54 @@
+generated: '2026-09-10'
+method: probed
+source: live GET of the named /.well-known/ path list on every host this record knows
+hit_count: 0
+note: 'Every named discovery path returned HTTP 404 on www.aerofugia.com, the only host Aerofugia
+  operates: the registrable domain aerofugia.com publishes no A record at all (NS vip3/vip4.alidns.com,
+  no apex address), so www is the entire web surface. The negative-control path returned 404 as well,
+  so these are true absences rather than an SPA catch-all answering 200 for everything. Note the origin
+  nginx 301-redirects any /api* path to ITSELF (an infinite self-redirect), which is why /apis.json and
+  /apis.yml record 301 rather than 404 — neither ever resolves to a document. No WellKnown or SecurityTxt
+  pointer is emitted: this file records an absence, not a served surface.'
+hosts:
+- host: https://www.aerofugia.com
+  path_echo_control: passed
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 301
+    note: 301 Location is the same URL — an nginx self-redirect loop, never a document
+  - path: /apis.yml
+    status: 301
+    note: 301 Location is the same URL — an nginx self-redirect loop, never a document
+  - path: /llms.txt
+    status: 404
+  - path: /.well-known/aerofugia-negative-control-9c41ea3d.json
+    status: 404
+    control: true
+- host: https://aerofugia.com
+  unreachable: true
+  note: 'No A record on the apex; DNS resolution fails (curl exit 6), so no path could be probed.'
+  documents: []

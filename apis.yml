@@ -1,16 +1,33 @@
 aid: aerofugia
 name: Aerofugia
-description: 'Aerofugia is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Aerofugia (沃飞长空, Sichuan Aerofugia Technology Development Co., Ltd.) is a Chengdu-based advanced air
+  mobility company founded in 2020 under Zhejiang Geely Holding Group''s Geely Technology Group, focused on the
+  research, certification and commercial operation of low-altitude passenger aircraft. Its flagship product is the
+  AE200 series, a six-seat all-electric piloted eVTOL with a roughly 200 km range aimed at intercity air mobility,
+  low-altitude tourism and emergency medical transport; the AE200 was the first piloted eVTOL type certificate application
+  accepted by the Civil Aviation Administration of China, has completed full tilt-transition flight testing, and
+  the company holds a CCAR-135 air operator certificate. As of this profile Aerofugia publishes no public developer
+  program, API documentation or machine-readable API contract: it is an aircraft manufacturer and future air-mobility
+  operator, not a platform vendor.'
 url: https://raw.githubusercontent.com/api-evangelist/aerofugia/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: 'enrichment pass 2026-09-10: full STEP 0b contract discovery run against the only host
+  the company operates (www.aerofugia.com); no public API surface found'
 specificationVersion: '0.20'
 created: '2026-09-10'
 modified: '2026-09-10'
 tags:
+- Aviation
+- Aerospace
+- eVTOL
+- Advanced Air Mobility
+- Urban Air Mobility
+- Electric Aircraft
+- Transportation
+- Manufacturing
+- China
 - Company
 apis: []
 maintainers:
@@ -19,5 +36,38 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/aerofugia-domain-security.yml
 - type: Website
-  url: https://equityzen.com/company/aerofugia
+  url: https://www.aerofugia.com/
+- type: PrivacyPolicy
+  url: https://www.aerofugia.com/privacy
+- type: Blog
+  url: https://www.aerofugia.com/newslist
+image: https://aerogw.obs.cn-east-3.myhuaweicloud.com/media/logo/02hui2.png
+x-enrichment:
+  date: '2026-09-10'
+  status: minimal
+  artifacts_added: 2
+  pass: local-v3
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: 'Aerofugia builds and will operate eVTOL aircraft, not software products: every URL in its
+    own sitemap.xml (66 of them) is marketing, news, recruitment or a partnership contact form, there
+    is no /developers, /docs or /api path, no GitHub organization exists under the name, and the origin
+    nginx 301-redirects every /api* path to itself so nothing under /api can ever resolve.'
+  evidence:
+  - url: https://www.aerofugia.com/sitemap.xml
+    status: 200
+  - url: https://www.aerofugia.com/openapi.json
+    status: 404
+  - url: https://www.aerofugia.com/api-docs
+    status: 301
+  - url: https://www.aerofugia.com/.well-known/api-catalog
+    status: 404
+  - url: https://www.aerofugia.com/.well-known/agent-card.json
+    status: 404
+  - url: https://api.github.com/orgs/aerofugia
+    status: 404
+  checked: '2026-09-10'
